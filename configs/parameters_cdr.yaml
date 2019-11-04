@@ -1,0 +1,52 @@
+# network
+batch: 2
+epoch: 13
+bilstm_layers: 1
+word_dim: 200
+lstm_dim: 100
+out_dim: 100
+type_dim: 10
+beta: 0.8
+dist_dim: 10
+drop_i: 0.5
+drop_m: 0.0
+drop_o: 0.3
+lr: 0.002
+gc: 10
+reg: 0.0001
+opt: adam
+patience: 10
+unk_w_prob: 0.5
+min_w_freq: 1
+walks_iter: 
+tune_bias:
+
+# data based
+train_data: ../data/CDR/processed/train_filter.data
+test_data: ../data/CDR/procesed/dev_filter.data
+embeds: ../embeds/PubMed-CDR.txt
+folder: ../results/cdr-dev
+save_pred: dev
+
+# options (chosen from parse input otherwise false)
+lowercase: false
+plot: true
+show_class: false
+param_avg: true
+early_stop: true
+save_model: true
+types: false
+context: false
+dist: false
+freeze_words: false
+
+# extra
+seed: 0
+shuffle_data: true
+label2ignore: 1:NR:2
+primary_metric: micro_f
+direction: l2r+r2l
+include_pairs: ['Chemical-Disease', 'Chemical-Chemical', 'Disease-Disease', 'Disease-Chemical']
+classify_pairs: ['Chemical-Disease']
+edges: ['MM', 'ME', 'MS', 'ES', 'SS-ind']
+window: 
