@@ -36,6 +36,7 @@ cd ..
 Pre-trained word embeddings
 ```
 mkdir embeds
+cd embeds
 wget https://drive.google.com/open?id=0BzMCqpcgEJgiUWs0ZnU0NlFTam8
 ```
 
