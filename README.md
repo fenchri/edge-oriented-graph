@@ -78,15 +78,14 @@ $ python3 eog.py --config ../configs/parameters_cdr.yaml --train --gpu 0 --walks
 ### Citation
 Please cite the following papers when using this code:
 
-> @inproceedings{christopoulou2019connecting,  
-title={Connecting the Dots: Document-level Relation Extraction with Edge-oriented Graphs},  
-author={Christopoulou, Fenia and Miwa, Makoto and Ananiadou, Sophia},  
-booktitle={},   
-publisher={} 
-year={2019},
-publisher={Association for Computational Linguistics},
-pages={},    
-}
+> @inproceedings{christopoulou-etal-2019-connecting,  
+title = "Connecting the Dots: Document-level Neural Relation Extraction with Edge-oriented Graphs",  
+author = "Christopoulou, Fenia and Miwa, Makoto and Ananiadou, Sophia",  
+booktitle = "Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)",  
+year = "2019",  
+publisher = "Association for Computational Linguistics",  
+pages = "4927--4938"  
+}  
 
 > @inproceedings{christopoulou2018walk,  
 title={A Walk-based Model on Entity Graphs for Relation Extraction},  
