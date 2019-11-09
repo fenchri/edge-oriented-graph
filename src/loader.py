@@ -58,16 +58,16 @@ class ConfigLoader:
             parameters['edges'] = inp.edges
 
         if inp.types:
-            parameters['types'] = True
+            parameters['types'] = inp.types
         
         if inp.dist:
-            parameters['dist'] = True
+            parameters['dist'] = inp.dist
         
         if inp.window:
             parameters['window'] = inp.window
 
         if inp.context:
-            parameters['context'] = True
+            parameters['context'] = inp.context
        
         if inp.seed:
             parameters['seed'] = inp.seed
