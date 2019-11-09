@@ -44,17 +44,6 @@ $ sh process_cdr.sh
 $ sh process_gda.sh
 ```
 
-Pre-trained word embeddings
-```
-$ mkdir embeds && cd embeds
-$ wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=0BzMCqpcgEJgiUWs0ZnU0NlFTam8' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=0BzMCqpcgEJgiUWs0ZnU0NlFTam8" -O bio_nlp_vecs && rm -rf /tmp/cookies.txt
-$ tar -xzvf bio_nlp_vecs && mv bio_nlp_vec/* ./ && rm -r bio_nlp_vec
-$ cd ../data_processing
-$ ./convertvec bin2txt ../embeds/PubMed-shuffle-win-2.bin ../embeds/PubMed-shuffle-win-2.txt  # convert to .txt
-$ python3 reduce_embeds.py --full_embeds ../embeds/PubMed-shuffle-win-2.txt --out_embeds ../embeds/PubMed-CDR.txt --in_data ../data/CDR/processed/train_filter.data ../data/CDR/processed/dev_filter.data ../data/CDR/processed/test_filter.data  # reduce number of word embeddings to dataset size
-```
-
-
 
 ## Usage
 Run the main script from training and testing as follows. Select gpu to -1 for cpu mode.
