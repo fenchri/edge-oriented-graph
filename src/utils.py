@@ -297,7 +297,7 @@ def print_options(params):
             '''.format(params['train_data'], params['test_data'], params['embeds'], params['freeze_words'],
                        params['folder'],
                        params['batch'],
-                       params['walks_iter'], 2 ** params['walks_iter'], params['beta'],
+                       params['walks_iter'], 2 ** params['walks_iter'] if params['walks_iter'] else 0, params['beta'],
                        params['context'], params['types'], params['dist'], params['edges'],
                        params['window'], params['epoch'],
                        params['unk_w_prob'], params['param_avg'],

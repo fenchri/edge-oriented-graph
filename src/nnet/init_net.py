@@ -77,7 +77,7 @@ class BaseNet(nn.Module):
             else:
                 self.ee = False
 
-        if params['walks_iter'] > 0:
+        if params['walks_iter'] and params['walks_iter'] > 0:
             self.walk = WalkLayer(input_size=params['out_dim'],
                                   iters=params['walks_iter'],
                                   beta=params['beta'],
@@ -110,5 +110,4 @@ class BaseNet(nn.Module):
         self.ignore_label = lab2ign
         self.context = params['context']
         self.dist = params['dist']
-        self.tune_bias = params['tune_bias']
 

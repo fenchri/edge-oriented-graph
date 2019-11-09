@@ -26,15 +26,13 @@ class ConfigLoader:
         parser.add_argument('--test', action='store_true', help='Testing mode - needs a model to load')
         parser.add_argument('--gpu', type=int, help='GPU number')
         parser.add_argument('--walks', type=int, help='Number of walk iterations')
-        parser.add_argument('--window', type=int)
-        parser.add_argument('--edges', nargs='*')
-        parser.add_argument('--types', action='store_true')
-        parser.add_argument('--context', action='store_true')
-        parser.add_argument('--dist', action='store_true')
-        parser.add_argument('--tune_bias', type=float)
-        parser.add_argument('--example', action='store_true')
-        parser.add_argument('--seed', type=int)
-        parser.add_argument('--epoch', type=int)
+        parser.add_argument('--window', type=int, help='Window for training (1 means 1 sentence at a time)')
+        parser.add_argument('--edges', nargs='*', help='Edge types')
+        parser.add_argument('--types', type=bool, help='Include node types (Boolean)')
+        parser.add_argument('--context', type=bool, help='Include MM context (Boolean)')
+        parser.add_argument('--dist', type=bool, help='Include distance (Boolean)')
+        parser.add_argument('--example', help='Show example', action='store_true')
+        parser.add_argument('--seed', help='Fixed random seed number', type=int)
         return parser.parse_args()
 
     def load_config(self):
@@ -43,34 +41,36 @@ class ConfigLoader:
             parameters = yaml.load(f, Loader=yamlordereddictloader.Loader)
 
         parameters = dict(parameters)
+        if not parameters['train'] and not parameters['test']:
+            print('Please specify train/test mode.')
+            sys.exit(0)
+            
         parameters['train'] = inp.train
         parameters['test'] = inp.test
         parameters['gpu'] = inp.gpu
         parameters['example'] = inp.example
 
-        if inp.walks != None:
+        if inp.walks:
             parameters['walks_iter'] = inp.walks
 
         if inp.edges:
             parameters['edges'] = inp.edges
 
         if inp.types:
-            parameters['types'] = inp.types
-
+            parameters['types'] = True
+        
         if inp.dist:
-            parameters['dist'] = inp.dist
-
+            parameters['dist'] = True
+        
         if inp.window:
             parameters['window'] = inp.window
 
         if inp.context:
-            parameters['context'] = inp.context
-
+            parameters['context'] = True
+       
         if inp.seed:
             parameters['seed'] = inp.seed
 
-        if inp.epoch:
-            parameters['epoch'] = inp.epoch
         return parameters
 
 

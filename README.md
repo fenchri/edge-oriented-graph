@@ -1,4 +1,4 @@
-# Connecting the Dots
+# Edge-oriented Graph
 Source code for the paper "[Connecting the Dots: Document-level Relation Extraction with Edge-oriented Graphs](https://www.aclweb.org/anthology/D19-1498.pdf)" in EMNLP 2019.
 
 
@@ -15,32 +15,23 @@ pip3 install -r requirements.txt
 ```
 
 ### Environment
-Results can be reproducable, when using a seed equal to 0.
-The model was trained on a GK210GL Tesla K80 GPU.
+Results can be reproducable, when using a seed equal to 0 and the following settings: GK210GL Tesla K80 GPU, Ubuntu 16.04
 
 
 ## Datasets & Pre-processing
-Download the datasets.
+Download the datasets
 ```
-mkdir data
-cd data
-wget https://biocreative.bioinformatics.udel.edu/media/store/files/2016/CDR_Data.zip
-unzip CDR_Data.zip
-mv CDR_DATA CDR
-wget https://bitbucket.org/alexwuhkucs/gda-extraction/get/fd4a7409365e.zip
-unzip fd4a7409365e.zip
-mv alexwuhkucs-gda-extraction-fd4a7409365e GDA
-cd ..
-```
-
-Pre-trained word embeddings
-```
-mkdir embeds
-cd embeds
-wget https://drive.google.com/open?id=0BzMCqpcgEJgiUWs0ZnU0NlFTam8
+$ mkdir data && cd data
+$ wget https://biocreative.bioinformatics.udel.edu/media/store/files/2016/CDR_Data.zip
+$ unzip CDR_Data.zip
+$ mv CDR_DATA CDR
+$ wget https://bitbucket.org/alexwuhkucs/gda-extraction/get/fd4a7409365e.zip
+$ unzip fd4a7409365e.zip
+$ mv alexwuhkucs-gda-extraction-fd4a7409365e GDA
+$ cd ..
 ```
 
-First download the GENIA Tagger and Sentence Splitter:
+Download the GENIA Tagger and Sentence Splitter:
 ```
 $ cd data_processing
 $ mkdir common && cd common
@@ -54,13 +45,25 @@ $ cd genia-tagger-py && make && cd ..
 In order to process the datasets, they should first be transformed into the PubTator format.
 ```
 $ sh process_cdr.sh
-$ sh process_cdr.sh
+$ sh process_gda.sh
+```
+
+Pre-trained word embeddings
+```
+$ mkdir embeds
+$ cd embeds
+$ wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=0BzMCqpcgEJgiUWs0ZnU0NlFTam8' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=0BzMCqpcgEJgiUWs0ZnU0NlFTam8" -O bio_nlp_vecs && rm -rf /tmp/cookies.txt
+$ tar -xzvf bio_nlp_vecs
+$ mv bio_nlp_vec/* ./ && rm -r bio_nlp_vec
+$ cd ../data_processing
+$ python3 bin2txt.py ../embeds/PubMed-shuffle-win-2.bin  # convert to .txt
+$ python3 reduce_embeds.py --full_embeds ../embeds/PubMed-shuffle-win-2.txt --out_embeds ../embeds/PubMed-CDR.txt --in_data ../data/CDR/processed/train_filter.data ../data/CDR/processed/dev_filter.data ../data/CDR/processed/test_filter.data  # reduce embeddings to dataset size
 ```
 
 
 
 ## Usage
-Run the main script from training and testing as follows. Select gpu -1 for cpu.
+Run the main script from training and testing as follows. Select gpu to -1 for cpu mode.
 ```
 $ cd src/
 $ python3 eog.py --config ../configs/parameters_cdr.yaml --train --gpu 0
@@ -68,17 +71,35 @@ $ python3 eog.py --config ../configs/parameters_cdr.yaml --test --gpu 0
 ```
 
 All necessary parameters can be stored in the yaml files inside the configs directory.
-The following parameters can be also given as direct inputs as well:
+The following parameters can be also given as direct input as well:
 ```
-$ cd src/
-$ python3 eog.py --config ../configs/parameters_cdr.yaml --train --gpu 0 --walks 3 --edges MM ME MS ES SS-ind --context --types --dist
+usage: eog.py [-h] --config CONFIG [--train] [--test] [--gpu GPU]
+              [--walks WALKS] [--window WINDOW] [--edges [EDGES [EDGES ...]]]
+              [--types TYPES] [--context CONTEXT] [--dist DIST] [--example]
+              [--seed SEED]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --config CONFIG       Yaml parameter file
+  --train               Training mode - model is saved
+  --test                Testing mode - needs a model to load
+  --gpu GPU             GPU number
+  --walks WALKS         Number of walk iterations
+  --window WINDOW       Window for training (1 means 1 sentence at a time)
+  --edges [EDGES [EDGES ...]]
+                        Edge types
+  --types TYPES         Include node types (Boolean)
+  --context CONTEXT     Include MM context (Boolean)
+  --dist DIST           Include distance (Boolean)
+  --example             Show example
+  --seed SEED           Fixed random seed number
 ```
 
 
 ### Citation
 Please cite the following papers when using this code:
 
-> @inproceedings{christopoulou-etal-2019-connecting,  
+> @inproceedings{christopoulou2019connecting,  
 title = "Connecting the Dots: Document-level Neural Relation Extraction with Edge-oriented Graphs",  
 author = "Christopoulou, Fenia and Miwa, Makoto and Ananiadou, Sophia",  
 booktitle = "Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)",  
@@ -88,11 +109,11 @@ pages = "4927--4938"
 }  
 
 > @inproceedings{christopoulou2018walk,  
-title={A Walk-based Model on Entity Graphs for Relation Extraction},  
-author={Christopoulou, Fenia and Miwa, Makoto and Ananiadou, Sophia},  
-booktitle={Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers)},  
-year={2018},  
-publisher={Association for Computational Linguistics},  
-pages={81--88},  
+title = "A Walk-based Model on Entity Graphs for Relation Extraction",  
+author = "Christopoulou, Fenia and Miwa, Makoto and Ananiadou, Sophia",  
+booktitle = "Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers)",  
+year = "2018",  
+publisher = "Association for Computational Linguistics",  
+pages = "81--88",  
 }
 

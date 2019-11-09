@@ -49,7 +49,6 @@ class Trainer:
         self.es = params['early_stop']
         self.primary_metric = params['primary_metric']
         self.show_class = params['show_class']
-        self.tune_bias = params['tune_bias']
         self.window = params['window']
         self.preds_file = os.path.join(model_folder, params['save_pred'])
         self.best_epoch = 0

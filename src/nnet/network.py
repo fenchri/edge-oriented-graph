@@ -305,7 +305,7 @@ class EOG(BaseNet):
                                                            batch['section'], batch['distances'])
 
         # Inference/Walks
-        if self.walks_iter > 0:
+        if self.walks_iter and self.walks_iter > 0:
             graph = self.walk(graph, adj_=batch['adjacency'], mask_=mask)
 
         # Classification

@@ -18,12 +18,11 @@ opt: adam
 patience: 10
 unk_w_prob: 0.5
 min_w_freq: 1
-walks_iter: 
-tune_bias:
+walks_iter:  
 
 # data based
 train_data: ../data/CDR/processed/train_filter.data
-test_data: ../data/CDR/procesed/dev_filter.data
+test_data: ../data/CDR/processed/dev_filter.data
 embeds: ../embeds/PubMed-CDR.txt
 folder: ../results/cdr-dev
 save_pred: dev
@@ -35,9 +34,9 @@ show_class: false
 param_avg: true
 early_stop: true
 save_model: true
-types: false
-context: false
-dist: false
+types: true
+context: true
+dist: true
 freeze_words: false
 
 # extra

@@ -19,7 +19,6 @@ patience: 5
 unk_w_prob: 0.5
 min_w_freq: 1
 walks_iter: 3
-tune_bias:
 
 # data based
 train_data: ../data/GDA/training.data
@@ -35,9 +34,9 @@ show_class: false
 param_avg: true
 early_stop: true
 save_model: true
-types: false
-context: false
-dist: false
+types: true
+context: true
+dist: true
 freeze_words: false
 
 # extra
