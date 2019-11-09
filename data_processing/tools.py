@@ -240,7 +240,8 @@ def sentence_split_genia(tabst):
     os.chdir(genia_splitter)
 
     with open('temp_file.txt', 'w') as ofile:
-        ofile.write(''.join(tabst))
+        for t in tabst:
+            ofile.write(t+'\n')
     os.system('./geniass temp_file.txt temp_file.split.txt > /dev/null 2>&1')
 
     split_lines = []

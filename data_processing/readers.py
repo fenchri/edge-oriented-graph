@@ -38,7 +38,7 @@ def readPubTator(args):
                 line = line.strip().split('|')
 
                 pmid = line[0]
-                text = line[2].replace('>', '\n')
+                text = line[2]  # .replace('>', '\n')
 
                 # replace weird symbols and spaces
                 text = replace2symbol(text)

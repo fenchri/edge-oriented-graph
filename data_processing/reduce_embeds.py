@@ -29,13 +29,11 @@ def load_pretrained_embeddings(embeds):
                     if len(vec) != num:
                         # print('Wrong dimensionality: {} {} != {}'.format(word, len(vec), num))
                         continue
-                    E[word] = np.asarray(vec, dtype=np.float32)
-        
-        pre_words = [w for w, e in E.items()]
+                    else:
+                        E[word] = np.asarray(vec, dtype=np.float32)
         print('Pre-trained word embeddings: {} x {}'.format(len(E), n))
     else:
         E = OrderedDict()
-        pre_words = []
         print('No pre-trained word embeddings loaded.')
     return E
 
@@ -44,7 +42,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--full_embeds', type=str)
     parser.add_argument('--out_embeds', type=str)
-    parser.add_argument('--in_data', '--list', nargs='+')
+    parser.add_argument('--in_data', nargs='+')
     args = parser.parse_args()
 
     words = []
@@ -53,15 +51,17 @@ def main():
     for filef in args.in_data:
         with open(filef, 'r') as infile:
             for line in infile:
-                line = line.strip().split('\t')[1].split(' ')
+                line = line.strip().split('\t')[1]
+                line = line.split('|')
+                line = [l.split(' ') for l in line]
+                line = [item for sublist in line for item in sublist]
 
                 for l in line:
                     words.append(l)
     print('Done')
 
     # make lowercase
-    words_lower = list(map(lambda x:x.lower(),words))
-
+    words_lower = list(map(lambda x:x.lower(), words))
 
     print('Loading embeddings ... ', end="")
     embeddings = load_pretrained_embeddings(args.full_embeds)
@@ -77,7 +77,7 @@ def main():
 
     with open(args.out_embeds, 'w') as outfile:
         for g in new_embeds.keys():
-            outfile.write(g+' '+' '.join(map(str, list(new_embeds[g])))+'\n')
+            outfile.write('{} {}\n'.format(g, ' '.join(map(str, list(new_embeds[g])))))
     print('Done')
     
 if __name__ == "__main__":

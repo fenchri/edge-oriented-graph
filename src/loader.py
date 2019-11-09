@@ -26,7 +26,8 @@ class ConfigLoader:
         parser.add_argument('--test', action='store_true', help='Testing mode - needs a model to load')
         parser.add_argument('--gpu', type=int, help='GPU number')
         parser.add_argument('--walks', type=int, help='Number of walk iterations')
-        parser.add_argument('--window', type=int, help='Window for training (1 means 1 sentence at a time)')
+        parser.add_argument('--window', type=int, help='Window for training (empty processes the whole document, '
+                                                       '1 processes 1 sentence at a time, etc)')
         parser.add_argument('--edges', nargs='*', help='Edge types')
         parser.add_argument('--types', type=bool, help='Include node types (Boolean)')
         parser.add_argument('--context', type=bool, help='Include MM context (Boolean)')
@@ -41,10 +42,10 @@ class ConfigLoader:
             parameters = yaml.load(f, Loader=yamlordereddictloader.Loader)
 
         parameters = dict(parameters)
-        if not parameters['train'] and not parameters['test']:
+        if not inp.train and not inp.test:
             print('Please specify train/test mode.')
             sys.exit(0)
-            
+
         parameters['train'] = inp.train
         parameters['test'] = inp.test
         parameters['gpu'] = inp.gpu

@@ -22,12 +22,8 @@ Results can be reproducable, when using a seed equal to 0 and the following sett
 Download the datasets
 ```
 $ mkdir data && cd data
-$ wget https://biocreative.bioinformatics.udel.edu/media/store/files/2016/CDR_Data.zip
-$ unzip CDR_Data.zip
-$ mv CDR_DATA CDR
-$ wget https://bitbucket.org/alexwuhkucs/gda-extraction/get/fd4a7409365e.zip
-$ unzip fd4a7409365e.zip
-$ mv alexwuhkucs-gda-extraction-fd4a7409365e GDA
+$ wget https://biocreative.bioinformatics.udel.edu/media/store/files/2016/CDR_Data.zip && unzip CDR_Data.zip && mv CDR_Data CDR
+$ wget https://bitbucket.org/alexwuhkucs/gda-extraction/get/fd4a7409365e.zip && unzip fd4a7409365e.zip && mv alexwuhkucs-gda-extraction-fd4a7409365e GDA
 $ cd ..
 ```
 
@@ -35,11 +31,11 @@ Download the GENIA Tagger and Sentence Splitter:
 ```
 $ cd data_processing
 $ mkdir common && cd common
-$ wget http://www.nactem.ac.uk/y-matsu/geniass/geniass-1.00.tar.gz
-$ tar xvzf geniass-1.00.tar.gz
-$ cd geniass/ && make & cd ..
+$ wget http://www.nactem.ac.uk/y-matsu/geniass/geniass-1.00.tar.gz && tar xvzf geniass-1.00.tar.gz
+$ cd geniass/ && make && cd ..
 $ git clone https://github.com/bornabesic/genia-tagger-py.git
-$ cd genia-tagger-py && make && cd ..
+$ cd genia-tagger-py && make
+$ cd ../../
 ```
 
 In order to process the datasets, they should first be transformed into the PubTator format.
@@ -50,14 +46,12 @@ $ sh process_gda.sh
 
 Pre-trained word embeddings
 ```
-$ mkdir embeds
-$ cd embeds
+$ mkdir embeds && cd embeds
 $ wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=0BzMCqpcgEJgiUWs0ZnU0NlFTam8' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=0BzMCqpcgEJgiUWs0ZnU0NlFTam8" -O bio_nlp_vecs && rm -rf /tmp/cookies.txt
-$ tar -xzvf bio_nlp_vecs
-$ mv bio_nlp_vec/* ./ && rm -r bio_nlp_vec
+$ tar -xzvf bio_nlp_vecs && mv bio_nlp_vec/* ./ && rm -r bio_nlp_vec
 $ cd ../data_processing
-$ python3 bin2txt.py ../embeds/PubMed-shuffle-win-2.bin  # convert to .txt
-$ python3 reduce_embeds.py --full_embeds ../embeds/PubMed-shuffle-win-2.txt --out_embeds ../embeds/PubMed-CDR.txt --in_data ../data/CDR/processed/train_filter.data ../data/CDR/processed/dev_filter.data ../data/CDR/processed/test_filter.data  # reduce embeddings to dataset size
+$ ./convertvec bin2txt ../embeds/PubMed-shuffle-win-2.bin ../embeds/PubMed-shuffle-win-2.txt  # convert to .txt
+$ python3 reduce_embeds.py --full_embeds ../embeds/PubMed-shuffle-win-2.txt --out_embeds ../embeds/PubMed-CDR.txt --in_data ../data/CDR/processed/train_filter.data ../data/CDR/processed/dev_filter.data ../data/CDR/processed/test_filter.data  # reduce number of word embeddings to dataset size
 ```
 
 
@@ -85,7 +79,7 @@ optional arguments:
   --test                Testing mode - needs a model to load
   --gpu GPU             GPU number
   --walks WALKS         Number of walk iterations
-  --window WINDOW       Window for training (1 means 1 sentence at a time)
+  --window WINDOW       Window for training (empty processes the whole document, 1 processes 1 sentence at a time, etc)
   --edges [EDGES [EDGES ...]]
                         Edge types
   --types TYPES         Include node types (Boolean)

@@ -1,6 +1,6 @@
 # network
 batch: 3
-epoch: 100
+epoch: 50
 bilstm_layers: 1
 word_dim: 200
 lstm_dim: 100

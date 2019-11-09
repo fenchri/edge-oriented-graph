@@ -65,7 +65,7 @@ def replace2symbol(string):
 
 def replace2space(string):
     spaces = ["\r", '\xa0', '\xe2\x80\x85', '\xc2\xa0', '\u2009', '\u2002', '\u200a', '\u2005', '\u2003', '\u2006',
-              'Ⅲ', '…', 'Ⅴ', "\u202f", '>']
+              'Ⅲ', '…', 'Ⅴ', "\u202f"]
 
     for i in spaces:
         string = string.replace(i, ' ')

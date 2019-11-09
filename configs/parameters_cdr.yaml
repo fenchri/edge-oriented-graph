@@ -1,6 +1,6 @@
 # network
 batch: 2
-epoch: 13
+epoch: 50
 bilstm_layers: 1
 word_dim: 200
 lstm_dim: 100
@@ -18,7 +18,7 @@ opt: adam
 patience: 10
 unk_w_prob: 0.5
 min_w_freq: 1
-walks_iter:  
+walks_iter: 3
 
 # data based
 train_data: ../data/CDR/processed/train_filter.data
