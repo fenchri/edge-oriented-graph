@@ -2,7 +2,7 @@
 Source code for the paper "[Connecting the Dots: Document-level Relation Extraction with Edge-oriented Graphs](https://www.aclweb.org/anthology/D19-1498.pdf)" in EMNLP 2019.
 
 <p align="center">
-  <img src="./network.svg" height="200">
+  <img src="./network.svg" height="190">
 </p>
 
 ### Requirements
