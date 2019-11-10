@@ -21,8 +21,8 @@ min_w_freq: 1
 walks_iter: 3
 
 # data based
-train_data: ../data/GDA/training.data
-test_data: ../data/GDA/test.data
+train_data: ../data/GDA/processed/train.data
+test_data: ../data/GDA/processed/dev.data
 embeds: 
 folder: ../results/gda
 save_pred: test
