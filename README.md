@@ -1,6 +1,9 @@
 # Edge-oriented Graph
 Source code for the paper "[Connecting the Dots: Document-level Relation Extraction with Edge-oriented Graphs](https://www.aclweb.org/anthology/D19-1498.pdf)" in EMNLP 2019.
 
+<p align="center">
+  <img src="./network.svg" height="190">
+</p>
 
 ### Requirements
 - python 3.5 +
@@ -87,7 +90,8 @@ optional arguments:
 ### Citation
 Please cite the following papers when using this code:
 
-> @inproceedings{christopoulou2019connecting,  
+```
+@inproceedings{christopoulou2019connecting,  
 title = "Connecting the Dots: Document-level Neural Relation Extraction with Edge-oriented Graphs",  
 author = "Christopoulou, Fenia and Miwa, Makoto and Ananiadou, Sophia",  
 booktitle = "Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)",  
@@ -96,7 +100,7 @@ publisher = "Association for Computational Linguistics",
 pages = "4927--4938"  
 }  
 
-> @inproceedings{christopoulou2018walk,  
+@inproceedings{christopoulou2018walk,  
 title = "A Walk-based Model on Entity Graphs for Relation Extraction",  
 author = "Christopoulou, Fenia and Miwa, Makoto and Ananiadou, Sophia",  
 booktitle = "Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers)",  
@@ -104,4 +108,4 @@ year = "2018",
 publisher = "Association for Computational Linguistics",  
 pages = "81--88",  
 }
-
+```
