@@ -19,5 +19,9 @@ mv ../data/CDR/processed/Training_filter.data ../data/CDR/processed/train_filter
 mv ../data/CDR/processed/Development_filter.data ../data/CDR/processed/dev_filter.data
 mv ../data/CDR/processed/Test_filter.data ../data/CDR/processed/test_filter.data
 
+# merge train and dev
+cat ../data/CDR/processed/train_filter.data >> ../data/CDR/processed/train+dev_filter.data
+cat ../data/CDR/processed/dev_filter.data >> ../data/CDR/processed/train+dev_filter.data
+
 
 
