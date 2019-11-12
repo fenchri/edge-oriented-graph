@@ -49,10 +49,10 @@ $ sh process_gda.sh
 
 
 ## Usage
-Run the main script from training and testing as follows. Select gpu to -1 for cpu mode.  
+Run the main script from training and testing as follows. Select gpu -1 for cpu mode.  
 
 **CDR dataset**: Train the model on the training set and evaluate on the dev set, in order to identify the best training epoch.
-For testing, re-run the model on the union of train and dev (train+dev_filter.data) until the best epoch and evaluate on the test set.
+For testing, re-run the model on the union of train and dev (*train+dev_filter.data*) until the best epoch and evaluate on the test set.
 
 **GDA dataset**: Simply train the model on the training set and evaluate on the dev set. Test the saved model on the test set.
 
