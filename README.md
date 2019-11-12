@@ -56,9 +56,17 @@ For testing, re-run the model on the union of train and dev (train+dev_filter.da
 
 *GDA dataset*: Simply train the model on the training set and evaluate on the dev set. Test the saved model on the test set.
 
+In order to ensure the usage of early stopping criterion, use the '--early_stop' option.
+If during training early stopping is not triggered, the maximum epoch (specified in the config file) will be used.
+
+Otherwise, if you want to train up to a specific epoch, use the '--epoch epochNumber' option without early stopping.
+The maximum stopping epochs can be defined by the '--epoch' option.
+
+For example, in the CDR dataset:
 ```
 $ cd src/
-$ python3 eog.py --config ../configs/parameters_cdr.yaml --train --gpu 0
+$ python3 eog.py --config ../configs/parameters_cdr.yaml --train --gpu 0 --early_stop   # using early stopping
+$ python3 eog.py --config ../configs/parameters_cdr.yaml --train --gpu 0 --epoch 15     # train until the 15th epoch
 $ python3 eog.py --config ../configs/parameters_cdr.yaml --test --gpu 0
 ```
 
@@ -68,7 +76,7 @@ The following parameters can be also given as direct input as well:
 usage: eog.py [-h] --config CONFIG [--train] [--test] [--gpu GPU]
               [--walks WALKS] [--window WINDOW] [--edges [EDGES [EDGES ...]]]
               [--types TYPES] [--context CONTEXT] [--dist DIST] [--example]
-              [--seed SEED]
+              [--seed SEED] [--early_stop] [--epoch EPOCH]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -77,7 +85,8 @@ optional arguments:
   --test                Testing mode - needs a model to load
   --gpu GPU             GPU number
   --walks WALKS         Number of walk iterations
-  --window WINDOW       Window for training (empty processes the whole document, 1 processes 1 sentence at a time, etc)
+  --window WINDOW       Window for training (empty processes the whole
+                        document, 1 processes 1 sentence at a time, etc)
   --edges [EDGES [EDGES ...]]
                         Edge types
   --types TYPES         Include node types (Boolean)
@@ -85,6 +94,8 @@ optional arguments:
   --dist DIST           Include distance (Boolean)
   --example             Show example
   --seed SEED           Fixed random seed number
+  --early_stop          Use early stopping
+  --epoch EPOCH         Maximum training epoch
 ```
 
 

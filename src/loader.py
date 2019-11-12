@@ -34,6 +34,8 @@ class ConfigLoader:
         parser.add_argument('--dist', type=bool, help='Include distance (Boolean)')
         parser.add_argument('--example', help='Show example', action='store_true')
         parser.add_argument('--seed', help='Fixed random seed number', type=int)
+        parser.add_argument('--early_stop', action='store_true', help='Use early stopping')
+        parser.add_argument('--epoch', type=int, help='Maximum training epoch')
         return parser.parse_args()
 
     def load_config(self):
@@ -71,6 +73,12 @@ class ConfigLoader:
        
         if inp.seed:
             parameters['seed'] = inp.seed
+
+        if inp.epoch:
+            parameters['epoch'] = inp.epoch
+
+        if inp.early_stop:
+            parameters['early_stop'] = True
 
         return parameters
 
