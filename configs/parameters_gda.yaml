@@ -32,7 +32,7 @@ lowercase: false
 plot: true
 show_class: false
 param_avg: true
-early_stop: true
+early_stop: false
 save_model: true
 types: true
 context: true

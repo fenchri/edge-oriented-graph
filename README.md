@@ -51,22 +51,24 @@ $ sh process_gda.sh
 ## Usage
 Run the main script from training and testing as follows. Select gpu to -1 for cpu mode.  
 
-*CDR dataset*: Train the model on the training set and evaluate on the dev set, in order to identify the best training epoch.
+**CDR dataset**: Train the model on the training set and evaluate on the dev set, in order to identify the best training epoch.
 For testing, re-run the model on the union of train and dev (train+dev_filter.data) until the best epoch and evaluate on the test set.
 
-*GDA dataset*: Simply train the model on the training set and evaluate on the dev set. Test the saved model on the test set.
+**GDA dataset**: Simply train the model on the training set and evaluate on the dev set. Test the saved model on the test set.
 
-In order to ensure the usage of early stopping criterion, use the '--early_stop' option.
+In order to ensure the usage of early stopping criterion, use the '*--early_stop*' option.
 If during training early stopping is not triggered, the maximum epoch (specified in the config file) will be used.
 
-Otherwise, if you want to train up to a specific epoch, use the '--epoch epochNumber' option without early stopping.
-The maximum stopping epochs can be defined by the '--epoch' option.
+Otherwise, if you want to train up to a specific epoch, use the '*--epoch epochNumber*' option without early stopping.
+The maximum stopping epochs can be defined by the '*--epoch*' option.
 
 For example, in the CDR dataset:
 ```
 $ cd src/
-$ python3 eog.py --config ../configs/parameters_cdr.yaml --train --gpu 0 --early_stop   # using early stopping
-$ python3 eog.py --config ../configs/parameters_cdr.yaml --train --gpu 0 --epoch 15     # train until the 15th epoch
+$ python3 eog.py --config ../configs/parameters_cdr.yaml --train --gpu 0 --early_stop       # using early stopping
+$ python3 eog.py --config ../configs/parameters_cdr.yaml --train --gpu 0 --epoch 15         # train until the 15th epoch *without* early stopping
+$ python3 eog.py --config ../configs/parameters_cdr.yaml --train --gpu 0 --epoch 15 --early_stop  # set both early stop and max epoch
+
 $ python3 eog.py --config ../configs/parameters_cdr.yaml --test --gpu 0
 ```
 
