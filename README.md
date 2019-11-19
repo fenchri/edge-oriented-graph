@@ -103,7 +103,6 @@ optional arguments:
 
 ### Citation
 Please cite the following paper when using this code:
-
 ```
 @inproceedings{christopoulou2019connecting,  
 title = "Connecting the Dots: Document-level Neural Relation Extraction with Edge-oriented Graphs",  
