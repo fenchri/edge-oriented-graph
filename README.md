@@ -102,7 +102,7 @@ optional arguments:
 
 
 ### Citation
-Please cite the following papers when using this code:
+Please cite the following paper when using this code:
 
 ```
 @inproceedings{christopoulou2019connecting,  
@@ -113,13 +113,4 @@ year = "2019",
 publisher = "Association for Computational Linguistics",  
 pages = "4927--4938"  
 }  
-
-@inproceedings{christopoulou2018walk,  
-title = "A Walk-based Model on Entity Graphs for Relation Extraction",  
-author = "Christopoulou, Fenia and Miwa, Makoto and Ananiadou, Sophia",  
-booktitle = "Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers)",  
-year = "2018",  
-publisher = "Association for Computational Linguistics",  
-pages = "81--88",  
-}
 ```
