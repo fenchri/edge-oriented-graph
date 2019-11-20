@@ -100,7 +100,7 @@ for d, data in zip(['DATA'], [args.data]):
                 intra_types[p.type] += 1
 
             if p.cross == 'CROSS':
-                dist_ = 1000
+                dist_ = 10000
 
                 for m1 in entities[id_][k[0]].sentNo.split(':'):
                     for m2 in entities[id_][k[1]].sentNo.split(':'):
@@ -127,7 +127,7 @@ for d, data in zip(['DATA'], [args.data]):
     sent_len = [len(a.split()) for s in documents.values() for a in s]
 
     # write data
-    with open('GOLD', 'w') as outfile:
+    with open('/'.join(args.data.split('/')[:-1]) + '/' + args.data.split('/')[-1].split('.')[0] + '.gold', 'w') as outfile:
         for id_ in relations.keys():
             for k, p in relations[id_].items():
                 PairInfo = recordtype('PairInfo', 'type direction cross closeA closeB')
