@@ -84,7 +84,7 @@ def main():
             if i in relations:
                 pairs = generate_pairs(unique_entities, type1, type2, relations[i])
             else:
-                pairs = OrderedDict()
+                pairs = generate_pairs(unique_entities, type1, type2, [])   # generate only negative pairs
 
             # 'pmid type arg1 arg2 dir cross'
             data_out.write('{}\t{}'.format(i, '|'.join(token_sents)))
