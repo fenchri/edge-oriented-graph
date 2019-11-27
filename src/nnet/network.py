@@ -192,8 +192,7 @@ class EOG(BaseNet):
         """
         Col 0: node type | Col 1: semantic type | Col 2: sentence id
         """
-        # typ = torch.repeat_interleave(torch.arange(3).to(self.device), section.sum(dim=0))  # node types (0,1,2)
-        typ = torch.cat([torch.as_tensor([i]).to(self.device).repeat(section.sum(dim=0)) for i in torch.arange(3)], dim=0)
+        typ = torch.repeat_interleave(torch.arange(3).to(self.device), section.sum(dim=0))  # node types (0,1,2)
         rows_ = torch.bincount(info[:, 0]).cumsum(dim=0).sub(1)
         stypes = torch.neg(torch.ones(section[:, 2].sum())).to(self.device).long()  # semantic type sentences = -1
         all_types = torch.cat((info[:, 1][rows_], info[:, 1], stypes), dim=0)
