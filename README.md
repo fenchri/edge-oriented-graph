@@ -79,7 +79,7 @@ $ python3 eog.py --config ../configs/parameters_cdr.yaml --test --gpu 0
 ```
 
 All necessary parameters can be stored in the yaml files inside the configs directory.
-The following parameters can be also given as direct input as well:
+The following parameters can be also directly given as follows:
 ```
 usage: eog.py [-h] --config CONFIG [--train] [--test] [--gpu GPU]
               [--walks WALKS] [--window WINDOW] [--edges [EDGES [EDGES ...]]]
@@ -193,7 +193,7 @@ Below are the **GDA updated results**. Intra-sentence and overall performance ar
 
 
 ### Citation
-Please cite the following paper when using this code:
+If you found this code useful and plan to use it, please cite the following paper =)
 ```
 @inproceedings{christopoulou2019connecting,  
 title = "Connecting the Dots: Document-level Neural Relation Extraction with Edge-oriented Graphs",  
