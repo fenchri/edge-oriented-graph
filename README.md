@@ -41,7 +41,7 @@ $ cd genia-tagger-py && make
 $ cd ../../
 ```
 
-In order to process the datasets, they should first be transformed into the PubTator format.
+In order to process the datasets, they should first be transformed into the PubTator format. The run the processing scripts as follows:
 ```
 $ sh process_cdr.sh
 $ sh process_gda.sh
@@ -51,22 +51,22 @@ In order to get the data statistics run:
 ```
 python3 statistics.py --data ../data/CDR/processed/train.data
 ```
-This will additionally generate the gold-annotation file in the same folder with suffix *.gold*.
+This will additionally generate the gold-annotation file in the same folder with suffix `.gold`.
 
 
 ## Usage
 Run the main script from training and testing as follows. Select gpu -1 for cpu mode.  
 
 **CDR dataset**: Train the model on the training set and evaluate on the dev set, in order to identify the best training epoch.
-For testing, re-run the model on the union of train and dev (*train+dev_filter.data*) until the best epoch and evaluate on the test set.
+For testing, re-run the model on the union of train and dev (`train+dev_filter.data`) until the best epoch and evaluate on the test set.
 
 **GDA dataset**: Simply train the model on the training set and evaluate on the dev set. Test the saved model on the test set.
 
-In order to ensure the usage of early stopping criterion, use the '*--early_stop*' option.
+In order to ensure the usage of early stopping criterion, use the `--early_stop` option.
 If during training early stopping is not triggered, the maximum epoch (specified in the config file) will be used.
 
-Otherwise, if you want to train up to a specific epoch, use the '*--epoch epochNumber*' option without early stopping.
-The maximum stopping epochs can be defined by the '*--epoch*' option.
+Otherwise, if you want to train up to a specific epoch, use the `--epoch epochNumber` option without early stopping.
+The maximum stopping epochs can be defined by the `--epoch` option.
 
 For example, in the CDR dataset:
 ```
@@ -107,7 +107,7 @@ optional arguments:
 ```
 
 ### Evaluation
-In order to evaluate you can generate the gold data format first and then use the evaluation script as follows:
+In order to evaluate you need to first generate the gold data format and then use the evaluation script as follows:
 ```
 $ cd evaluation/
 $ python3 evaluate.py --pred path_to_predictions_file --gold ../data/CDR/processed/test.gold --label 1:CDR:2
@@ -116,7 +116,7 @@ $ python3 evaluate.py --pred path_to_predictions_file --gold ../data/GDA/process
 
 ##  ** Results **
 Below are the results in terms of *F1-score* for the CDR and GDA datasets.  
-The results of CDR are the same as reported in the paper and can be reproduced using the source provided source code with a similar environment.  
+The results of CDR are the same as reported in the paper and can be reproduced using the provided source code with a similar environment.  
 *For the GDA dataset, due to a sentence-splitting error, some inter-sentence pairs were missed.*  
 Below are the **GDA updated results**. Intra-sentence and overall performance are similar, however, inter-sentence performance differs.
 
