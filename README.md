@@ -14,8 +14,8 @@ The model was trained on Tesla K80 GPU, Ubuntu 16.04. Results are reproducible w
 
 ### Reproducibility & Bug Fixes
 
-In the original code, there was a bug related to the word embedding layer.
-If you want to reproduce the results presented in the paper, you need to use the "buggy" code: [reproduceEMNLP](https://github.com/fenchri/edge-oriented-graph/tree/reproduceEMNLP). 
+In the original code, there was a bug related to the word embedding layer.  
+If you want to reproduce the results presented in the paper, you need to use the "buggy" code: [reproduceEMNLP](https://github.com/fenchri/edge-oriented-graph/tree/reproduceEMNLP).   
 Otherwise we recommend that you use the current version (with higher performance).
 
 
