@@ -15,7 +15,7 @@ The model was trained on Tesla K80 GPU, Ubuntu 16.04. Results are reproducible w
 ### Reproducibility & Bug Fixes
 
 In the original code, there was a bug related to the word embedding layer.  
-If you want to reproduce the results presented in the paper, you need to use the "buggy" code: [reproduceEMNLP](https://github.com/fenchri/edge-oriented-graph/tree/reproduceEMNLP).   
+If you want to reproduce the results presented in the paper, you need to use the "buggy" code: [reproduceEMNLP](https://github.com/fenchri/edge-oriented-graph/tree/reproduceEMNLP)   
 Otherwise we recommend that you use the current version (with higher performance).
 
 
@@ -49,6 +49,8 @@ $ sh process_gda.sh
 In order to get the data statistics run:
 ```
 python3 statistics.py --data ../data/CDR/processed/train.data
+python3 statistics.py --data ../data/CDR/processed/dev.data
+python3 statistics.py --data ../data/CDR/processed/test.data
 ```
 This will additionally generate the gold-annotation file in the same folder with suffix `.gold`.
 
