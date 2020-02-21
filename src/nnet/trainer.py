@@ -56,6 +56,11 @@ class Trainer:
         self.train_res = {'loss': [], 'score': []}
         self.test_res = {'loss': [], 'score': []}
 
+        self.max_patience = self.params['patience']
+        self.cur_patience = 0
+        self.best_score = 0.0
+        self.best_epoch = 0
+
         # pairs while training
         self.pairs4train = []
         for i in params['include_pairs']:
@@ -67,12 +72,6 @@ class Trainer:
         for i in params['classify_pairs']:
             m, n = i.split('-')
             self.pairs4class += [self.loader.type2index[m], self.loader.type2index[n]]
-
-        # early-stopping
-        if self.es:
-            self.max_patience = self.params['patience']
-            self.cur_patience = 0
-            self.best_score = 0.0
 
         # parameter averaging
         if params['param_avg']:
@@ -145,26 +144,17 @@ class Trainer:
 
             self.eval_epoch()
             
-            if self.es:
-                best_epoch, stop = self.early_stopping(epoch)
-                if stop:
-                    break
+            stop = self.epoch_checking(epoch)
+            if stop and self.es:
+                break
 
             if self.pa:
                 self.parameter_averaging(reset=True)
 
-        if self.es and (epoch != self.epoch):
-            print('Best epoch: {}'.format(best_epoch))
-
-            if self.pa:
-                self.parameter_averaging(epoch=best_epoch)
-            self.eval_epoch(final=True, save_predictions=True)
-            self.best_epoch = best_epoch
-
-        elif epoch == self.epoch:
-            if self.pa:
-                self.parameter_averaging(epoch=epoch)
-            self.eval_epoch(final=True, save_predictions=True)
+        print('Best epoch: {}'.format(self.best_epoch))
+        if self.pa:
+            self.parameter_averaging(epoch=self.best_epoch)
+        self.eval_epoch(final=True, save_predictions=True)
 
         print('\n======== END TRAINING: {} ========\n'.format(
             datetime.datetime.now().strftime("%d-%m-%y_%H:%M:%S")))
@@ -283,7 +273,7 @@ class Trainer:
             else:
                 p_value.data = torch.from_numpy(p_new)
 
-    def early_stopping(self, epoch):
+    def epoch_checking(self, epoch):
         """
         Perform early stopping.
         If performance does not improve for a number of consecutive epochs ("max_patience")
@@ -297,14 +287,22 @@ class Trainer:
         if self.test_res['score'][-1] > self.best_score:  # improvement
             self.best_score = self.test_res['score'][-1]
             self.cur_patience = 0
+            if self.es:
+                self.best_epoch = epoch
         else:
             self.cur_patience += 1
+            if not self.es:
+                self.best_epoch = epoch
 
-        if self.max_patience == self.cur_patience:  # early stop must happen
-            best_epoch = epoch - self.max_patience
-            return best_epoch, True
+        if epoch % 5 == 0:
+            print('Current best {} score {:.6f} @ epoch {}\n'.format(self.params['primary_metric'],
+                                                                     self.best_score, self.best_epoch))
+
+        if self.max_patience == self.cur_patience and self.es:  # early stop must happen
+            self.best_epoch = epoch - self.max_patience
+            return True
         else:
-            return epoch, False
+            return False
 
     @staticmethod
     def performance(stats):
