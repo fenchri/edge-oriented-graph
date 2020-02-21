@@ -31,10 +31,10 @@ class EmbedLayer(nn.Module):
         self.embedding = nn.Embedding(num_embeddings=num_embeddings,
                                       embedding_dim=embedding_dim,
                                       padding_idx=ignore)
-        self.embedding.weight.requires_grad = not freeze
 
         if pretrained:
             self.load_pretrained(pretrained, mapping)
+        self.embedding.weight.requires_grad = not freeze
 
         self.drop = nn.Dropout(dropout)
 
