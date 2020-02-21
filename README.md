@@ -7,16 +7,16 @@ Source code for the paper "[Connecting the Dots: Document-level Relation Extract
 
 
 ### Environment
-`$ pip3 install -r requirements.txt`
+`$ pip3 install -r requirements.txt`  
 The model was trained on Tesla K80 GPU, Ubuntu 16.04. Results are reproducible with a fixed seed.
 
 
 
-### Reproducibility
+### Reproducibility & Bug Fixes
 
-In the original code, there was a bug related to the word embedding layer, hence performance is lower.
-
-If you want to reproduce the results presented in the paper, you need to use the "buggy" code: [reproduceEMNLP](https://github.com/fenchri/edge-oriented-graph/tree/reproduceEMNLP), otherwise we recommend that you use the current version.
+In the original code, there was a bug related to the word embedding layer.
+If you want to reproduce the results presented in the paper, you need to use the "buggy" code: [reproduceEMNLP](https://github.com/fenchri/edge-oriented-graph/tree/reproduceEMNLP). 
+Otherwise we recommend that you use the current version (with higher performance).
 
 
 
