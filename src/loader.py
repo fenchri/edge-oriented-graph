@@ -64,9 +64,8 @@ class ConfigLoader:
         parameters['gpu'] = inp.gpu
         parameters['example'] = inp.example
 
-        if inp.walks:
-            if inp.walks >= 0:
-                parameters['walks_iter'] = inp.walks
+        if inp.walks and inp.walks >= 0:
+            parameters['walks_iter'] = inp.walks
 
         if inp.edges:
             parameters['edges'] = inp.edges
