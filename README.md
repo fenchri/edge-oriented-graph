@@ -5,20 +5,19 @@ Source code for the paper "[Connecting the Dots: Document-level Relation Extract
   <img src="./network.svg" height="190">
 </p>
 
-### Requirements
-- python 3.5 +
-- PyTorch 1.1.0
-- tqdm
-- matplotlib
-- recordtype
-- orderedyamlload
-
-```
-pip3 install -r requirements.txt
-```
 
 ### Environment
-Results can be reproducable, when using a seed equal to 0 and the following settings: GK210GL Tesla K80 GPU, Ubuntu 16.04
+pip3 install -r requirements.txt
+The model was trained on Tesla K80 GPU, Ubuntu 16.04. Results are reproducible with a fixed seed.
+
+
+
+### Reproducibility
+
+In the original code, there was a bug related to the word embedding layer, hence performance is lower.
+
+If you want to reproduce the results presented in the paper, you need to use the "buggy" code: [reproduceEMNLP](https://github.com/fenchri/edge-oriented-graph/tree/reproduceEMNLP), otherwise we recommend that you use the current version.
+
 
 
 ## Datasets & Pre-processing
@@ -114,85 +113,9 @@ $ python3 evaluate.py --pred path_to_predictions_file --gold ../data/CDR/process
 $ python3 evaluate.py --pred path_to_predictions_file --gold ../data/GDA/processed/test.gold --label 1:GDA:2
 ```
 
-##  ** Results **
-Below are the results in terms of *F1-score* for the CDR and GDA datasets.  
-The results of CDR are the same as reported in the paper and can be reproduced using the provided source code with a similar environment.  
-*For the GDA dataset, due to a sentence-splitting error, some inter-sentence pairs were missed.*  
-Below are the **GDA updated results**. Intra-sentence and overall performance are similar, however, inter-sentence performance differs.
-
-<table>
-<tr>
-    <td colspan="2"> <center><b>CDR</b></center> </td>
-    <td colspan="3"><center><i>Dev</i> F1 (%)</center></td>
-    <td colspan="3"><center><i>Test</i> F1 (%)</center></td>
-  </tr>
-  <tr>
-    <td colspan="2"><center>Model</center></td>
-    <td>Overall</td>
-    <td>Intra</td>
-    <td>Inter</td>
-    <td>Overall</td>
-    <td>Intra</td>
-    <td>Inter</td>
-  </tr>
-  <tr>
-	 <td>EoG</td>  <td>L = 8</td> <td>63.57</td> 	<td>68.25</td> 	<td>46.68</td>
-				  <td>63.62</td> 	<td>68.25</td> 	<td>50.94</td> 
-   </tr>
-    <tr>
-	 <td>EoG (Full) </td> <td>L = 2</td> <td>58.90</td> 	<td>66.49</td> 	<td>40.20</td>
-				          <td>57.66</td> 	<td>66.52</td> 	<td>39.41</td> 
-   </tr>
-    <tr>
-	 <td>EoG (NoInf)</td> <td>-</td> <td>50.07 </td> 	<td> 57.58</td> 	<td> 33.93</td>
-				          <td> 49.24</td> 	<td> 60.12</td> 	<td>30.64 </td> 
-   </tr>
-    <tr>
-	 <td>EoG (Sent) </td> <td>L = 4</td> <td> 57.56</td> 	<td> 65.47</td> 	<td>- </td>
-				          <td> 55.22</td> 	<td> 65.29</td> 	<td>- </td>  
-   </tr>
-</table>  
-
-
-<table>
-<tr>
-    <td colspan="2"> <center><b>GDA</b></center> </td>
-    <td colspan="3"><center><i>Dev</i> F1 (%)</center></td>
-    <td colspan="3"><center><i>Test</i> F1 (%)</center></td>
-  </tr>
-  <tr>
-    <td colspan="2"><center>Model</center></td>
-    <td>Overall</td>
-    <td>Intra</td>
-    <td>Inter</td>
-    <td>Overall</td>
-    <td>Intra</td>
-    <td>Inter</td>
-  </tr>
-  <tr>
-	 <td>EoG</td>  <td>L = 16</td>   
-                  <td> 78.61</td> 	<td> 83.00</td> 	<td>46.92 </td>
-				  <td> 80.18</td> 	<td>84.74 </td> 	<td> 45.66</td> 
-   </tr>
-    <tr>
-	 <td>EoG (Full) </td>  <td>L = 4</td>
-                    <td> 77.89</td> 	<td> 82.26</td> 	<td>54.26 </td>
-				    <td> 79.94</td> 	<td>84.60 </td> 	<td>54.77 </td> 
-   </tr>
-    <tr>
-	 <td>EoG (NoInf) </td>  <td> - </td>
-                     <td> 71.60 </td> <td>  77.19</td> 	<td>  45.34</td>
-				     <td> 73.73</td>  <td> 79.22 </td> 	<td> 47.06 </td> 
-   </tr>
-    <tr>
-	 <td>EoG (Sent) </td> <td> L = 16 </td>
-                    <td> 72.17 </td> <td>78.10  </td> <td>- </td>
-				    <td> 73.05 </td> <td>78.83 </td> <td>- </td>  
-   </tr>
-</table>
-
 
 ### Citation
+
 If you found this code useful and plan to use it, please cite the following paper =)
 ```
 @inproceedings{christopoulou2019connecting,  
