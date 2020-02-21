@@ -7,7 +7,7 @@ Source code for the paper "[Connecting the Dots: Document-level Relation Extract
 
 
 ### Environment
-pip3 install -r requirements.txt
+`$ pip3 install -r requirements.txt`
 The model was trained on Tesla K80 GPU, Ubuntu 16.04. Results are reproducible with a fixed seed.
 
 
