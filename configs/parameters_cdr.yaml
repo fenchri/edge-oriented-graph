@@ -18,14 +18,14 @@ opt: adam
 patience: 10
 unk_w_prob: 0.5
 min_w_freq: 1
-walks_iter: 3
+walks_iter: 4
 
 # data based
-train_data: ../data/CDR/processed/train_filter.data
-test_data: ../data/CDR/processed/dev_filter.data
+train_data: ../data/CDR/processed/train+dev_filter.data
+test_data: ../data/CDR/processed/test_filter.data
 embeds: ../embeds/PubMed-CDR.txt
-folder: ../results/cdr-dev
-save_pred: dev
+folder: ../results/cdr-test
+save_pred: test
 
 # options (chosen from parse input otherwise false)
 lowercase: false
@@ -37,7 +37,7 @@ save_model: true
 types: true
 context: true
 dist: true
-freeze_words: false
+freeze_words: true
 
 # extra
 seed: 0

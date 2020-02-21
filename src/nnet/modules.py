@@ -43,17 +43,17 @@ class EmbedLayer(nn.Module):
         Args:
             weights: (dict) keys are words, values are vectors
             mapping: (dict) keys are words, values are unique ids
-            trainable: (bool)
 
         Returns: updates the embedding matrix with pre-trained embeddings
         """
-        pret_embeds = nn.init.normal_(torch.empty((self.num_embeddings, self.embedding_dim)))
         for word in mapping.keys():
             if word in pretrained:
-                pret_embeds[mapping[word], :] = torch.from_numpy(pretrained[word])
+                self.embedding.weight.data[mapping[word], :] = torch.from_numpy(pretrained[word])
             elif word.lower() in pretrained:
-                pret_embeds[mapping[word], :] = torch.from_numpy(pretrained[word.lower()])
-        self.embedding.from_pretrained(pret_embeds, freeze=self.freeze)
+                self.embedding.weight.data[mapping[word], :] = torch.from_numpy(pretrained[word.lower()])
+
+        assert (self.embedding.weight[mapping['and']].to('cpu').data.numpy() == pretrained['and']).all(), \
+            'ERROR: Embeddings not assigned'
 
     def forward(self, xs):
         """
