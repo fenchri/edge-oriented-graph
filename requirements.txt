@@ -1,7 +1,7 @@
 torch==1.1.0
 numpy==1.16.3
-matplotlib==2.1.2
-tqdm==4.26.0
+matplotlib
+tqdm
 recordtype
 yamlordereddictloader
 tabulate
