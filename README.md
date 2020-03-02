@@ -36,7 +36,9 @@ $ mkdir common && cd common
 $ wget http://www.nactem.ac.uk/y-matsu/geniass/geniass-1.00.tar.gz && tar xvzf geniass-1.00.tar.gz
 $ cd geniass/ && make && cd ..
 $ git clone https://github.com/bornabesic/genia-tagger-py.git
-$ cd genia-tagger-py && make
+$ cd genia-tagger-py 
+# Here, you should modify the Makefile and replace line 3 with `wget http://www.nactem.ac.uk/GENIA/tagger/geniatagger-3.0.2.tar.gz`
+$ make
 $ cd ../../
 ```
 
