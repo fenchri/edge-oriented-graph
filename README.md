@@ -116,7 +116,7 @@ In order to evaluate you need to first generate the gold data format and then us
 ```
 $ cd evaluation/
 $ python3 evaluate.py --pred path_to_predictions_file --gold ../data/CDR/processed/test_filter.gold --label 1:CDR:2
-$ python3 evaluate.py --pred path_to_predictions_file --gold ../data/GDA/processed/test_filter.gold --label 1:GDA:2
+$ python3 evaluate.py --pred path_to_predictions_file --gold ../data/GDA/processed/test.gold --label 1:GDA:2
 ```
 
 
