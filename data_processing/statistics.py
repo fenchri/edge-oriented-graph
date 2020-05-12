@@ -139,7 +139,6 @@ for d, data in zip(['DATA'], [args.data]):
     '''.format(d, docs))
 
     print('    Pairs')
-    print('total\t{}'.format(sum([y for x,y in pair_types.items() if x!='1:NR:2'])))
 
     for x in ['{:<10}\t{:<5}'.format(k, v) for k, v in sorted(pair_types.items())]:
         print('                                    {}'.format(x))

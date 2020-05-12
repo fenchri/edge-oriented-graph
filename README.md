@@ -36,7 +36,11 @@ $ mkdir common && cd common
 $ wget http://www.nactem.ac.uk/y-matsu/geniass/geniass-1.00.tar.gz && tar xvzf geniass-1.00.tar.gz
 $ cd geniass/ && make && cd ..
 $ git clone https://github.com/bornabesic/genia-tagger-py.git
-$ cd genia-tagger-py && make
+$ cd genia-tagger-py 
+```
+Here, you should modify the Makefile inside genia-tagger-py and replace line 3 with `wget http://www.nactem.ac.uk/GENIA/tagger/geniatagger-3.0.2.tar.gz`
+```
+$ make
 $ cd ../../
 ```
 
@@ -48,9 +52,9 @@ $ sh process_gda.sh
 
 In order to get the data statistics run:
 ```
-python3 statistics.py --data ../data/CDR/processed/train.data
-python3 statistics.py --data ../data/CDR/processed/dev.data
-python3 statistics.py --data ../data/CDR/processed/test.data
+python3 statistics.py --data ../data/CDR/processed/train_filter.data
+python3 statistics.py --data ../data/CDR/processed/dev_filter.data
+python3 statistics.py --data ../data/CDR/processed/test_filter.data
 ```
 This will additionally generate the gold-annotation file in the same folder with suffix `.gold`.
 
@@ -111,7 +115,7 @@ optional arguments:
 In order to evaluate you need to first generate the gold data format and then use the evaluation script as follows:
 ```
 $ cd evaluation/
-$ python3 evaluate.py --pred path_to_predictions_file --gold ../data/CDR/processed/test.gold --label 1:CDR:2
+$ python3 evaluate.py --pred path_to_predictions_file --gold ../data/CDR/processed/test_filter.gold --label 1:CDR:2
 $ python3 evaluate.py --pred path_to_predictions_file --gold ../data/GDA/processed/test.gold --label 1:GDA:2
 ```
 

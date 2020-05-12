@@ -294,7 +294,7 @@ class Trainer:
             if not self.es:
                 self.best_epoch = epoch
 
-        if epoch % 5 == 0:
+        if epoch % 5 == 0 and self.es:
             print('Current best {} score {:.6f} @ epoch {}\n'.format(self.params['primary_metric'],
                                                                      self.best_score, self.best_epoch))
 
