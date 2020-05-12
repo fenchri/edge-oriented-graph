@@ -159,8 +159,8 @@ def read(input_file, documents, entities, relations):
             if pmid not in relations:
                 relations[pmid] = OrderedDict()
 
-            # max sentence length
-            lengths += [max([len(s) for s in documents[pmid]])]
+            # max intra-sentence length and max inter-sentence length
+            lengths += [max([len(s) for s in documents[pmid]] + [len(documents[pmid])])]
             sents += [len(text.split('|'))]
 
             allp = 0

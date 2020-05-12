@@ -209,15 +209,13 @@ class DataLoader:
         self.pre_words = [w for w, e in self.pre_embeds.items()]
         print('  Found pre-trained word embeddings: {} x {}'.format(len(self.pre_embeds), word_dim), end="")
 
-    def find_max_length(self, length):
-        """ Maximum distance between words """
-        for l in length:
-            if l-1 > self.max_distance:
-                self.max_distance = l-1
+    def find_max_length(self, lengths):
+        self.max_distance = max(lengths)
 
     def read_n_map(self):
         """
         Read input.
+        Lengths is the max distance for each document
         """
         if not self.params['window']:
             lengths, sents, self.documents, self.entities, self.pairs = \
