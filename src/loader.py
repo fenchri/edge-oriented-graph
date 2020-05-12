@@ -210,7 +210,7 @@ class DataLoader:
         print('  Found pre-trained word embeddings: {} x {}'.format(len(self.pre_embeds), word_dim), end="")
 
     def find_max_length(self, lengths):
-        self.max_distance = max(lengths)
+        self.max_distance = max(lengths) - 1
 
     def read_n_map(self):
         """
