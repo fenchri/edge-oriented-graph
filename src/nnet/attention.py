@@ -61,6 +61,11 @@ class Dot_Attention(nn.Module):
         alpha = torch.where(mask_.unsqueeze(1),
                             alpha,
                             torch.as_tensor([float('-inf')]).to(self.device))
-        alpha = self.softmax(alpha)
+        
+        # in case all context words are masked (e.g. only 2 mentions in the sentence) -- a naive fix
+        alpha = torch.where(torch.isinf(alpha).all(dim=2, keepdim=True), torch.full_like(alpha, 1.0), alpha)
+		alpha = self.softmax(alpha)
+		alpha = torch.where(torch.eq(alpha, 1/alpha.shape[2]).all(dim=2, keepdim=True), torch.zeros_like(alpha), alpha)
+
         alpha = torch.squeeze(alpha, 1)
         return alpha
