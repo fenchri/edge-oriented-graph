@@ -44,6 +44,9 @@ $ make
 $ cd ../../
 ```
 
+**Important**: In case genia splitter produces errors (e.g. cannot find a temp file), make sure you have ruby installed
+` sudo apt-get install ruby-full `
+
 In order to process the datasets, they should first be transformed into the PubTator format. The run the processing scripts as follows:
 ```
 $ sh process_cdr.sh
