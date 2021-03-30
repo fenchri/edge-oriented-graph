@@ -44,8 +44,7 @@ $ make
 $ cd ../../
 ```
 
-**Important**: In case genia splitter produces errors (e.g. cannot find a temp file), make sure you have ruby installed
-` sudo apt-get install ruby-full `
+> **Important**: In case genia splitter produces errors (e.g. cannot find a temp file), make sure you have ruby installed `sudo apt-get install ruby-full`
 
 In order to process the datasets, they should first be transformed into the PubTator format. The run the processing scripts as follows:
 ```
@@ -63,7 +62,7 @@ This will additionally generate the gold-annotation file in the same folder with
 
 
 ## Usage
-Run the main script from training and testing as follows. Select gpu -1 for cpu mode.  
+Run the main script for training and testing as follows. Select gpu -1 for cpu mode.  
 
 **CDR dataset**: Train the model on the training set and evaluate on the dev set, in order to identify the best training epoch.
 For testing, re-run the model on the union of train and dev (`train+dev_filter.data`) until the best epoch and evaluate on the test set.
@@ -74,7 +73,7 @@ In order to ensure the usage of early stopping criterion, use the `--early_stop`
 If during training early stopping is not triggered, the maximum epoch (specified in the config file) will be used.
 
 Otherwise, if you want to train up to a specific epoch, use the `--epoch epochNumber` option without early stopping.
-The maximum stopping epochs can be defined by the `--epoch` option.
+The maximum stopping epochs is defined by the `--epoch` option.
 
 For example, in the CDR dataset:
 ```
